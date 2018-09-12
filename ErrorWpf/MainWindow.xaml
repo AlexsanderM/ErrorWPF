@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ErrorWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="378.349" Width="895.717">
+	<Grid>
+		<TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" Name="textBoxFind"/>
+		<Button Content="Find" HorizontalAlignment="Left" Margin="251,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Find_Click"/>
+		<Button Content="All Base" HorizontalAlignment="Left" Margin="803,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="GetBase_Click"/>
+		<DataGrid Margin="0,83,0,0" Name="dataGridMed" >
+			<DataGrid.Columns>
+			</DataGrid.Columns>
+		</DataGrid>
+		<Button Content="over service" HorizontalAlignment="Left" Margin="466,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="OverService_Click"/>
+
+	</Grid>
 </Window>
