@@ -57,42 +57,65 @@ namespace ErrorWpf
 
         private void OverService_Click(object sender, RoutedEventArgs e)
         {
-            String[] dataBirdayArr = new String[dataGridMed.Items.Count];
-            String[] polisArr = new String[dataGridMed.Items.Count];
-            int[] medServiceArr = new int[dataGridMed.Items.Count];
+            ItemDataGrid itemDG = new ItemDataGrid();
 
-            for (int i = 0; i < dataGridMed.Items.Count - 1; i++)
+            int lengtRowsGrid = dataGridMed.Items.Count - 1;
+
+            String[] dataServiceArr = new String[lengtRowsGrid];
+            String[] doctorArr = new String[lengtRowsGrid];
+            String[] clinicArr = new String[lengtRowsGrid];
+            String[] dataBirdayArr = new String[lengtRowsGrid];
+            String[] polisArr = new String[lengtRowsGrid];
+            String[] pathientArr = new String[lengtRowsGrid];
+            int[] medServiceArr = new int[lengtRowsGrid];
+
+            for (int i = 0; i < lengtRowsGrid; i++)
             {
                 try
                 {
                     DataRowView drv = dataGridMed.Items[i] as DataRowView;
 
-                    dataBirdayArr[i] = drv[0].ToString();
+                    dataServiceArr[i] = drv[0].ToString();
+                    doctorArr[i] = drv[10].ToString();
+                    clinicArr[i] = drv[3].ToString();
+                    dataBirdayArr[i] = drv[4].ToString();
                     polisArr[i] = drv[5].ToString();
+                    pathientArr[i] = drv[7].ToString();
                     medServiceArr[i] = Convert.ToInt32(drv[18].ToString());
-
-                    //Console.WriteLine(polisArr[i] + dataBirdayArr[i]);
                 }
                 catch (Exception)
-                {                    
+                {
+                    pathientArr[i] = $"i";
                     medServiceArr[i] = i;
-                }
-
-                //dataGridMed.DataContext = null;
-                //dataGridMed.Items.Clear();                
+                }                
             }
 
-            for (int z = 0; z < dataGridMed.Items.Count - 1; z++)
+            itemDG.clearTable(dataGridMed);
+            itemDG.addNameColums(dataGridMed);                        
+
+            for (int z = 0; z < lengtRowsGrid; z++)
             {
                 if (medServiceArr[z] == 1001)
                 {
-                    for (int y = z + 1; y < dataGridMed.Items.Count - 1; y++)
+                    for (int y = z + 1; y < lengtRowsGrid; y++)
                     {
                         if (medServiceArr[y] == 1001 && String.Compare(polisArr[z], polisArr[y]) == 0)
                         {
-                            Console.WriteLine(medServiceArr[z] + " " + polisArr[z] + " " + dataBirdayArr[z]);
-                            Console.WriteLine(medServiceArr[y] + " " + polisArr[y] + " " + dataBirdayArr[y]);
+                            dataGridMed.Items.Add(new ItemDataGrid() {
+                                DataService = dataServiceArr[z],
+                                Doctor = doctorArr[z],
+                                Clinic = clinicArr[z],
+                                DataBirday = dataBirdayArr[z],
+                                Polic = polisArr[z],
+                                Pathient = pathientArr[z] });
 
+                            dataGridMed.Items.Add(new ItemDataGrid() {
+                                DataService = dataServiceArr[y],
+                                Doctor = doctorArr[y],
+                                Clinic = clinicArr[y],
+                                DataBirday = dataBirdayArr[y],
+                                Polic = polisArr[y],
+                                Pathient = pathientArr[y] });
                         }
                     }
                 }
