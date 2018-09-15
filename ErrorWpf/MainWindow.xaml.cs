@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using ErrorWpf.Data;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -58,8 +59,10 @@ namespace ErrorWpf
         private void OverService_Click(object sender, RoutedEventArgs e)
         {
             ItemDataGrid itemDG = new ItemDataGrid();
+            DataServiceDay dataServiceDay = new DataServiceDay();
 
             int lengtRowsGrid = dataGridMed.Items.Count - 1;
+            int[] servicePrimaryArr = dataServiceDay.getServiceArr();
 
             String[] dataServiceArr = new String[lengtRowsGrid];
             String[] doctorArr = new String[lengtRowsGrid];
@@ -67,6 +70,7 @@ namespace ErrorWpf
             String[] dataBirdayArr = new String[lengtRowsGrid];
             String[] polisArr = new String[lengtRowsGrid];
             String[] pathientArr = new String[lengtRowsGrid];
+            Char[] sex = new char[lengtRowsGrid];
             int[] medServiceArr = new int[lengtRowsGrid];
 
             for (int i = 0; i < lengtRowsGrid; i++)
@@ -81,7 +85,8 @@ namespace ErrorWpf
                     dataBirdayArr[i] = drv[4].ToString();
                     polisArr[i] = drv[5].ToString();
                     pathientArr[i] = drv[7].ToString();
-                    medServiceArr[i] = Convert.ToInt32(drv[18].ToString());
+                    sex[i] = Convert.ToChar(drv[6]);
+                    medServiceArr[i] = Convert.ToInt32(drv[18]);
                 }
                 catch (Exception)
                 {
@@ -91,31 +96,43 @@ namespace ErrorWpf
             }
 
             itemDG.clearTable(dataGridMed);
-            itemDG.addNameColums(dataGridMed);                        
+            itemDG.addNameColums(dataGridMed);
 
-            for (int z = 0; z < lengtRowsGrid; z++)
+            for (int i = 0; i < servicePrimaryArr.Length; i++)
             {
-                if (medServiceArr[z] == 1001)
+                for (int z = 0; z < lengtRowsGrid; z++)
                 {
-                    for (int y = z + 1; y < lengtRowsGrid; y++)
+                    if (medServiceArr[z] == servicePrimaryArr[i])
                     {
-                        if (medServiceArr[y] == 1001 && String.Compare(polisArr[z], polisArr[y]) == 0)
+                        for (int y = z + 1; y < lengtRowsGrid; y++)
                         {
-                            dataGridMed.Items.Add(new ItemDataGrid() {
-                                DataService = dataServiceArr[z],
-                                Doctor = doctorArr[z],
-                                Clinic = clinicArr[z],
-                                DataBirday = dataBirdayArr[z],
-                                Polic = polisArr[z],
-                                Pathient = pathientArr[z] });
+                            if (medServiceArr[y] == servicePrimaryArr[i] && String.Compare(polisArr[z], polisArr[y]) == 0)
+                            {
+                                dataGridMed.Items.Add(new ItemDataGrid()
+                                {
+                                    DataService = dataServiceArr[z],
+                                    Doctor = doctorArr[z],
+                                    Clinic = clinicArr[z],
+                                    DataBirday = dataBirdayArr[z],
+                                    Polic = polisArr[z],
+                                    Pathient = pathientArr[z],
+                                    Sex = sex[z],
+                                    MedService = medServiceArr[z]
+                                });
 
-                            dataGridMed.Items.Add(new ItemDataGrid() {
-                                DataService = dataServiceArr[y],
-                                Doctor = doctorArr[y],
-                                Clinic = clinicArr[y],
-                                DataBirday = dataBirdayArr[y],
-                                Polic = polisArr[y],
-                                Pathient = pathientArr[y] });
+                                dataGridMed.Items.Add(new ItemDataGrid()
+                                {
+                                    DataService = dataServiceArr[y],
+                                    Doctor = doctorArr[y],
+                                    Clinic = clinicArr[y],
+                                    DataBirday = dataBirdayArr[y],
+                                    Polic = polisArr[y],
+                                    Pathient = pathientArr[y],
+                                    Sex = sex[y],
+                                    MedService = medServiceArr[y],
+                                    Remove = "Исключить"
+                                });
+                            }
                         }
                     }
                 }
