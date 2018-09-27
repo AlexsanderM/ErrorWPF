@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace ErrorWpf.Data
 {
-    public class DataServiceDay
+    public class DataServiceAll
     {
-        private int[] services = new int[] { 1001, 1301};
+        private readonly int[] services = new int[] {
+            1001, 1002, 1011, 1012, 1051, 1052, 1141, 1142, 1161, 1162, 1261, 1262, 1301,
+            1302, 1371, 1372, 1801, 1802, 22106};
 
         public int[] getServiceArr()
         {

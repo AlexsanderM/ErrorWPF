@@ -43,7 +43,7 @@ namespace ErrorWpf
             textColumn6.Header = "Пациент";
             textColumn7.Header = "Пол";
             textColumn8.Header = "Услуга";
-            textColumn9.Header = "Исключить";
+            textColumn9.Header = "Исправить";
 
             textColumn.Binding = new Binding("DataService");
             textColumn2.Binding = new Binding("Doctor");

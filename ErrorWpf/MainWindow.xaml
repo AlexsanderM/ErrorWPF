@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="378.349" Width="895.717">
 	<Grid>
-		<TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" Name="textBoxFind"/>
+		<TextBox HorizontalAlignment="Left" Height="68" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" Name="textBoxFind"/>
 		<Button Content="Find" HorizontalAlignment="Left" Margin="251,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Find_Click"/>
 		<Button Content="All Base" HorizontalAlignment="Left" Margin="803,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="GetBase_Click"/>
-		
+
 		<DataGrid Margin="0,83,0,0" Name="dataGridMed" Background="White" BorderBrush="#FF2277CB" >
 			<DataGrid.Foreground>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -20,6 +20,6 @@
 			</DataGrid.Foreground>
 		</DataGrid>
 		<Button Content="over service" HorizontalAlignment="Left" Margin="466,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="OverService_Click"/>
-
+		<Button Content="Получить список ПО и ВД" HorizontalAlignment="Left" Margin="619,10,0,0" VerticalAlignment="Top" Width="153" Height="23" Click="GetListVDPO_Click"/>
 	</Grid>
 </Window>
