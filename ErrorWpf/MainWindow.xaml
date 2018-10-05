@@ -21,5 +21,6 @@
 		</DataGrid>
 		<Button Content="over service" HorizontalAlignment="Left" Margin="466,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="OverService_Click"/>
 		<Button Content="Получить список ПО и ВД" HorizontalAlignment="Left" Margin="619,10,0,0" VerticalAlignment="Top" Width="153" Height="23" Click="GetListVDPO_Click"/>
+		<ProgressBar x:Name="LoadProgress" HorizontalAlignment="Left" Height="17" Margin="399,52,0,0" VerticalAlignment="Top" Width="221"/>
 	</Grid>
 </Window>

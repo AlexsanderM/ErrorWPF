@@ -19,18 +19,24 @@ using System.Windows.Shapes;
 
 namespace ErrorWpf
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        ItemDataGrid itemDG = new ItemDataGrid();
-        DataServiceAll dataServiceAll = new DataServiceAll();
         int lengtRowsGrid;
         int[] serviceArr;
-
         String[] dataServiceArr;
+        String[] doctorArr;
+        String[] clinicArr;
+        String[] dataBirdayArr;
+        String[] polisArr;
+        String[] pathientArr;
+        String[] diagnoseArr;
+        String[] moneyArr;
+        Char[] sex;
+        bool[] flag;
+        int[] medServiceArr;
 
+        ItemDataGrid itemDG = new ItemDataGrid();
+        DataServiceAll dataServiceAll = new DataServiceAll();        
 
         public MainWindow()
         {
@@ -62,50 +68,27 @@ namespace ErrorWpf
                     }
                 }
             }
+            
+            lengtRowsGrid = dataGridMed.Items.Count - 1;
+            serviceArr = dataServiceAll.getServiceArr();
 
-            int lengtRowsGrid = dataGridMed.Items.Count - 1;
-            int[] serviceArr = dataServiceAll.getServiceArr();
-
-            String[] dataServiceArr = new String[lengtRowsGrid];
-
+            dataServiceArr = new String[lengtRowsGrid];
+            doctorArr = new String[lengtRowsGrid];
+            clinicArr = new String[lengtRowsGrid];
+            dataBirdayArr = new String[lengtRowsGrid];
+            polisArr = new String[lengtRowsGrid];
+            pathientArr = new String[lengtRowsGrid];
+            diagnoseArr = new String[lengtRowsGrid];
+            moneyArr = new String[lengtRowsGrid];
+            sex = new char[lengtRowsGrid];
+            flag = new bool[lengtRowsGrid];
+            medServiceArr = new int[lengtRowsGrid];
         }
 
         private void OverService_Click(object sender, RoutedEventArgs e)
         {
+            addArrayItem(lengtRowsGrid);                            
             
-            String[] doctorArr = new String[lengtRowsGrid];
-            String[] clinicArr = new String[lengtRowsGrid];
-            String[] dataBirdayArr = new String[lengtRowsGrid];
-            String[] polisArr = new String[lengtRowsGrid];
-            String[] pathientArr = new String[lengtRowsGrid];
-            Char[] sex = new char[lengtRowsGrid];
-            bool[] flag = new bool[lengtRowsGrid];
-
-            int[] medServiceArr = new int[lengtRowsGrid];
-
-            for (int i = 0; i < lengtRowsGrid; i++)
-            {
-                try
-                {
-                    DataRowView drv = dataGridMed.Items[i] as DataRowView;
-
-                    dataServiceArr[i] = drv[0].ToString();
-                    doctorArr[i] = drv[10].ToString();
-                    clinicArr[i] = drv[3].ToString();
-                    dataBirdayArr[i] = drv[4].ToString();
-                    polisArr[i] = drv[5].ToString();
-                    pathientArr[i] = drv[7].ToString();
-                    sex[i] = Convert.ToChar(drv[6]);
-                    flag[i] = true;
-                    medServiceArr[i] = Convert.ToInt32(drv[18]);
-                }
-                catch (Exception)
-                {
-                    pathientArr[i] = $"i";
-                    medServiceArr[i] = i;
-                }                
-            }
-
             itemDG.clearTable(dataGridMed);
             itemDG.addNameColums(dataGridMed);
 
@@ -131,6 +114,7 @@ namespace ErrorWpf
                                             DataBirday = dataBirdayArr[z],
                                             Polic = polisArr[z],
                                             Pathient = pathientArr[z],
+                                            Diagnose = diagnoseArr[z],
                                             Sex = sex[z],
                                             MedService = medServiceArr[z]
                                         });
@@ -146,6 +130,7 @@ namespace ErrorWpf
                                         DataBirday = dataBirdayArr[y],
                                         Polic = polisArr[y],
                                         Pathient = pathientArr[y],
+                                        Diagnose = diagnoseArr[y],
                                         Sex = sex[y],
                                         MedService = medServiceArr[y],
                                         Remove = "Исключить"
@@ -167,6 +152,7 @@ namespace ErrorWpf
                                                 DataBirday = dataBirdayArr[z],
                                                 Polic = polisArr[z],
                                                 Pathient = pathientArr[z],
+                                                Diagnose = diagnoseArr[z],
                                                 Sex = sex[z],
                                                 MedService = medServiceArr[z]
                                             });
@@ -182,6 +168,7 @@ namespace ErrorWpf
                                             DataBirday = dataBirdayArr[y],
                                             Polic = polisArr[y],
                                             Pathient = pathientArr[y],
+                                            Diagnose = diagnoseArr[y],
                                             Sex = sex[y],
                                             MedService = medServiceArr[y],
                                             Remove = Convert.ToString(medServiceArr[y] + 1)
@@ -199,41 +186,7 @@ namespace ErrorWpf
 
         private void GetListVDPO_Click(object sender, RoutedEventArgs e)
         {
-            int lengtRowsGrid = dataGridMed.Items.Count - 1;
-            int[] serviceArr = dataServiceAll.getServiceArr();
-
-            String[] dataServiceArr = new String[lengtRowsGrid];
-            String[] doctorArr = new String[lengtRowsGrid];
-            String[] clinicArr = new String[lengtRowsGrid];
-            String[] dataBirdayArr = new String[lengtRowsGrid];
-            String[] polisArr = new String[lengtRowsGrid];
-            String[] pathientArr = new String[lengtRowsGrid];
-            Char[] sex = new char[lengtRowsGrid];
-            int[] medServiceArr = new int[lengtRowsGrid];
-            bool[] flag = new bool[lengtRowsGrid];
-
-            for (int i = 0; i < lengtRowsGrid; i++)
-            {
-                try
-                {
-                    DataRowView drv = dataGridMed.Items[i] as DataRowView;
-
-                    dataServiceArr[i] = drv[0].ToString();
-                    doctorArr[i] = drv[10].ToString();
-                    clinicArr[i] = drv[3].ToString();
-                    dataBirdayArr[i] = drv[4].ToString();
-                    polisArr[i] = drv[5].ToString();
-                    pathientArr[i] = drv[7].ToString();
-                    sex[i] = Convert.ToChar(drv[6]);
-                    medServiceArr[i] = Convert.ToInt32(drv[18]);
-                    flag[i] = true;
-                }
-                catch (Exception)
-                {
-                    pathientArr[i] = $"i";
-                    medServiceArr[i] = i;
-                }
-            }
+            addArrayItem(lengtRowsGrid);
 
             itemDG.clearTable(dataGridMed);
             itemDG.addNameColums(dataGridMed);
@@ -250,6 +203,8 @@ namespace ErrorWpf
                         DataBirday = dataBirdayArr[z],
                         Polic = polisArr[z],
                         Pathient = pathientArr[z],
+                        Diagnose = diagnoseArr[z],
+                        Money = moneyArr[z],
                         Sex = sex[z],
                         MedService = medServiceArr[z]
                     });
@@ -266,6 +221,8 @@ namespace ErrorWpf
                                 DataBirday = dataBirdayArr[y],
                                 Polic = polisArr[y],
                                 Pathient = pathientArr[y],
+                                Diagnose = diagnoseArr[y],
+                                Money = moneyArr[y],
                                 Sex = sex[y],
                                 MedService = medServiceArr[y]
                             });
@@ -279,6 +236,33 @@ namespace ErrorWpf
                     }
                 }
             }            
+        }
+
+        private void addArrayItem(int lenghtArr) {
+            for (int i = 0; i < lenghtArr; i++)
+            {
+                try
+                {
+                    DataRowView drv = dataGridMed.Items[i] as DataRowView;
+
+                    dataServiceArr[i] = drv[0].ToString();
+                    doctorArr[i] = drv[10].ToString();
+                    clinicArr[i] = drv[3].ToString();
+                    dataBirdayArr[i] = drv[4].ToString();
+                    polisArr[i] = drv[5].ToString();
+                    pathientArr[i] = drv[7].ToString();
+                    diagnoseArr[i] = drv[21].ToString();
+                    moneyArr[i] = drv[16].ToString();
+                    sex[i] = Convert.ToChar(drv[6]);
+                    medServiceArr[i] = Convert.ToInt32(drv[18]);
+                    flag[i] = true;
+                }
+                catch (Exception)
+                {
+                    pathientArr[i] = $"i";
+                    medServiceArr[i] = i;
+                }
+            }
         }
     }
 }

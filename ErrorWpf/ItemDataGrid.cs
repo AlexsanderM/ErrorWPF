@@ -16,6 +16,8 @@ namespace ErrorWpf
         public string DataBirday { get; set; }
         public string Polic { get; set; }
         public string Pathient { get; set; }
+        public string Diagnose { get; set; }
+        public string Money { get; set; }
         public char Sex { get; set; }
         public int MedService { get; set; }
         public string Remove { get; set; }
@@ -34,6 +36,8 @@ namespace ErrorWpf
             DataGridTextColumn textColumn7 = new DataGridTextColumn();
             DataGridTextColumn textColumn8 = new DataGridTextColumn();
             DataGridTextColumn textColumn9 = new DataGridTextColumn();
+            DataGridTextColumn textColumn10 = new DataGridTextColumn();
+            DataGridTextColumn textColumn11 = new DataGridTextColumn();
 
             textColumn.Header = "Дата Услуги";            
             textColumn2.Header = "Доктор";
@@ -41,9 +45,11 @@ namespace ErrorWpf
             textColumn4.Header = "Дата Рождения";
             textColumn5.Header = "Полис";
             textColumn6.Header = "Пациент";
-            textColumn7.Header = "Пол";
-            textColumn8.Header = "Услуга";
-            textColumn9.Header = "Исправить";
+            textColumn7.Header = "Диагноз";
+            textColumn8.Header = "Цена";
+            textColumn9.Header = "Пол";
+            textColumn10.Header = "Услуга";
+            textColumn11.Header = "Исправить";
 
             textColumn.Binding = new Binding("DataService");
             textColumn2.Binding = new Binding("Doctor");
@@ -51,9 +57,11 @@ namespace ErrorWpf
             textColumn4.Binding = new Binding("DataBirday");
             textColumn5.Binding = new Binding("Polic");
             textColumn6.Binding = new Binding("Pathient");
-            textColumn7.Binding = new Binding("Sex");
-            textColumn8.Binding = new Binding("MedService");
-            textColumn9.Binding = new Binding("Remove");
+            textColumn7.Binding = new Binding("Diagnose");
+            textColumn8.Binding = new Binding("Money");
+            textColumn9.Binding = new Binding("Sex");
+            textColumn10.Binding = new Binding("MedService");
+            textColumn11.Binding = new Binding("Remove");
 
             dg.Columns.Add(textColumn);
             dg.Columns.Add(textColumn2);
@@ -64,6 +72,8 @@ namespace ErrorWpf
             dg.Columns.Add(textColumn7);
             dg.Columns.Add(textColumn8);
             dg.Columns.Add(textColumn9);
+            dg.Columns.Add(textColumn10);
+            dg.Columns.Add(textColumn11);
         }
     }
 }
